@@ -111,8 +111,11 @@ jobs:
         run: mv .pio/build/lilygo_eth_s3/firmware.bin .pio/build/lilygo_eth_s3/opendtu-lilygo_eth_s3.bin
         
       - name: Rename Firmware
-        run: mv .pio/build/${{ matrix.environment }}/firmware.bin .pio/build/${{ matrix.environment }}/opendtu-${{ matrix.environment }}.bin
-
+        run: |
+          if [ -f ".pio/build/${{ matrix.environment }}/firmware.bin" ]; then
+            mv .pio/build/${{ matrix.environment }}/firmware.bin .pio/build/${{ matrix.environment }}/opendtu-${{ matrix.environment }}.bin
+          fi 
+          
       - name: Rename Factory Firmware
         run: mv .pio/build/${{ matrix.environment }}/firmware.factory.bin .pio/build/${{ matrix.environment }}/opendtu-${{ matrix.environment }}.factory.bin
 
