@@ -103,7 +103,13 @@ jobs:
 
       - name: Build firmware
         run: pio run -e ${{ matrix.environment }}
+        
+      - name: Build lilygo_eth_s3
+        run: pio run -e lilygo_eth_s3
 
+      - name: Rename lilygo firmware
+        run: mv .pio/build/lilygo_eth_s3/firmware.bin .pio/build/lilygo_eth_s3/opendtu-lilygo_eth_s3.bin
+        
       - name: Rename Firmware
         run: mv .pio/build/${{ matrix.environment }}/firmware.bin .pio/build/${{ matrix.environment }}/opendtu-${{ matrix.environment }}.bin
 
@@ -116,6 +122,7 @@ jobs:
           path: |
             .pio/build/${{ matrix.environment }}/opendtu-${{ matrix.environment }}.bin
             .pio/build/${{ matrix.environment }}/opendtu-${{ matrix.environment }}.factory.bin
+            .pio/build/lilygo_eth_s3/opendtu-lilygo_eth_s3.bin
 
   release:
     name: Create Release
