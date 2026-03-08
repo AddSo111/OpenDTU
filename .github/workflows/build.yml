@@ -104,11 +104,11 @@ jobs:
       - name: Build firmware
         run: pio run -e ${{ matrix.environment }}
         
-      - name: Build lilygo_eth_s3
-        run: pio run -e lilygo_eth_s3
+      - name: Build t_eth_lite_s3
+        run: pio run -e t_eth_lite_s3
 
       - name: Rename lilygo firmware
-        run: mv .pio/build/lilygo_eth_s3/firmware.bin .pio/build/lilygo_eth_s3/opendtu-lilygo_eth_s3.bin
+        run: mv .pio/build/t_eth_lite_s3/firmware.bin .pio/build/t_eth_lite_s3/t_eth_lite_s3.bin
         
       - name: Rename Firmware
         run: |
