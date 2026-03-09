@@ -37,12 +37,26 @@ void NetworkSettingsClass::init(Scheduler& scheduler)
 
     if (PinMapping.isValidW5500Config()) {
         const PinMapping_t& pin = PinMapping.get();
-        _w5500 = W5500::setup(pin.w5500_mosi, pin.w5500_miso, pin.w5500_sclk, pin.w5500_cs, pin.w5500_int, pin.w5500_rst);
-        if (_w5500)
+
+        _w5500 = W5500::setup(
+            pin.w5500_mosi,
+            pin.w5500_miso,
+            pin.w5500_sclk,
+            pin.w5500_cs,
+            pin.w5500_int,
+            pin.w5500_rst
+        );
+
+        if (_w5500) {
             ESP_LOGI(TAG, "W5500: Connection successful");
-        else
+
+            _networkMode = network_mode::Ethernet;   // FIX: Ethernet aktivieren
+        }
+        else {
             ESP_LOGE(TAG, "W5500: Connection error!!");
+        }
     }
+
 #if CONFIG_ETH_USE_ESP32_EMAC
     else if (PinMapping.isValidEthConfig()) {
         const PinMapping_t& pin = PinMapping.get();
