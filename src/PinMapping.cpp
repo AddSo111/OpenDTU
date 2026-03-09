@@ -165,7 +165,6 @@ PinMappingClass::PinMappingClass()
     _pinMapping.w5500_cs = W5500_CS;
     _pinMapping.w5500_int = W5500_INT;
     _pinMapping.w5500_rst = W5500_RST;
-    _pinMapping.eth_enabled = true;
 
 #if CONFIG_ETH_USE_ESP32_EMAC
 #ifdef OPENDTU_ETHERNET
